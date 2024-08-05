@@ -1,0 +1,68 @@
+<!DOCTYPE html><!DOCTYPE html>
+<html>
+<head>
+    <title>Material Processing App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+
+    <div class="container jumbotron jumbotron-fluid">
+      <center>
+        <h1 class="display-4">Alloy Density Predictor</h1>
+        <hr class="my-4">
+        <img src="https://www.jobcaam.in/wp-content/uploads/2020/12/nit-warangal.png" />
+      </center>
+    </div>
+
+    <div class="container mt-5">
+        <h1>Material Processing Parameters</h1>
+        <form action="/predict" method="POST" class="form">
+
+            <br>
+            <div class="form-group">
+                <label for="material">Material:</label>
+                <select class="form-control" id="material" name="material">
+                    <option value="1" {{'selected' if material == 1 else '' }}>Al-50Si</option>
+                    <option value="2" {{'selected' if material == 2 else '' }}>IN-718</option>
+                    <option value="0" {{'selected' if material == 0 else '' }}>316L</option>
+                </select>
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label for="scan_speed">Scan Speed (mm/s):</label>
+                <input class="form-control" type="number" id="scan_speed" name="scan_speed" required value="{{scan_speed}}">
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label for="hatch_distance">Hatch Distance (mm):</label>
+                <input class="form-control" type="number" id="hatch_distance" name="hatch_distance" required step="0.001"  value="{{hatch_distance}}">
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label for="laser_power">Laser Power (Watts):</label>
+                <input class="form-control" type="number" id="laser_power" name="laser_power" required value="{{laser_power}}">
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label for="layer_thickness">Layer thickness(mm):</label>
+                <input class="form-control" type="number" id="layer_thickness" name="layer_thickness" required step="0.01" value="{{layer_thickness}}">
+            </div>
+            <br>
+
+            {% if prediction %}
+                <div class="alert alert-secondary" role="alert">
+                   Alloy Density = {{alloyDensity}}
+                </div>
+            {% endif %}
+            
+            <input type="submit" value="Predict" class="btn btn-primary">
+            
+        </form>
+    </div>
+
+</body>
+</html>
